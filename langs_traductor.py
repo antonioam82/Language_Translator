@@ -41,7 +41,10 @@ class traductor():
     def traduce(self):
         self.display2.delete('1.0',END)
         self.texto = self.display1.get('1.0',END)
-        self.traduc = (self.translator.translate(self.texto,dest='es').text)
+        self.lang = self.entryLang.get()
+        if self.entryLang.get() == "":
+            self.lang = 'en'
+        self.traduc = (self.translator.translate(self.texto,dest=self.lang).text)
         self.display2.insert(END,self.traduc)
         self.traduc = ""
         self.texto = ""
