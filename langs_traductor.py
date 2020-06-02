@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox, filedialog
 from tkinter import ttk
+#import pyttsx3
 import threading
 from playsound import playsound
 import gtts
@@ -42,6 +43,8 @@ class traductor():
         self.ventana.mainloop()
 
     def traduce(self):
+        if "speaking.mp3" in os.listdir():
+            os.remove("speaking.mp3")
         self.display2.delete('1.0',END)
         self.texto = self.display1.get('1.0',END)
         self.lang = self.entryLang.get()
@@ -60,7 +63,7 @@ class traductor():
 
     def listen(self):
         playsound("speaking.mp3")
-        os.remove("speaking.mp3")
+        
         
 if __name__=="__main__":
     traductor()
