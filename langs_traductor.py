@@ -2,7 +2,6 @@ from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox, filedialog
 from tkinter import ttk
-#import pyttsx3
 import threading
 from playsound import playsound
 import gtts
