@@ -39,7 +39,6 @@ class traductor():
         self.entryLang = ttk.Combobox(self.ventana,width=7)
         self.entryLang.place(x=516,y=170)
         
-
         self.ventana.mainloop()
 
     def traduce(self):
