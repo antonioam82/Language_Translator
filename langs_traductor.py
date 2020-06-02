@@ -2,7 +2,11 @@ from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox, filedialog
 from tkinter import ttk
-import pyttsx3
+#import pyttsx3
+import threading
+from playsound import playsound
+import gtts
+import os
 from googletrans import Translator
 
 class traductor():
@@ -22,7 +26,7 @@ class traductor():
         self.display2.place(x=610,y=77)
         self.btnListen1 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64)
         self.btnListen1.place(x=30,y=373)
-        self.btnListen2 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64)
+        self.btnListen2 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64,command=self.inicia)
         self.btnListen2.place(x=610,y=373)
         self.label1 = Label(self.ventana,text="TEXTO",bg="light blue",width=64)
         self.label1.place(x=30,y=53)
@@ -46,8 +50,20 @@ class traductor():
             self.lang = 'en'
         self.traduc = (self.translator.translate(self.texto,dest=self.lang).text)
         self.display2.insert(END,self.traduc)
-        self.traduc = ""
+        #self.traduc = ""
         self.texto = ""
+
+    def inicia(self):
+        t = threading.Thread(target=self.listen)
+        t.start()
+
+    def listen(self):
+        self.tts = gtts.gTTS(self.traduc,lang=self.lang)
+        self.tts.save("speaking.mp3")
+        playsound("speaking.mp3")
+        os.remove("speaking.mp3")
+        
+        
 
 if __name__=="__main__":
     traductor()
