@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox, filedialog
+from tkinter import ttk
 import pyttsx3
 from googletrans import Translator
 
@@ -29,6 +30,11 @@ class traductor():
         self.label2.place(x=610,y=53)
         self.btnTans = Button(self.ventana,text='TRADUCIR',command=self.traduce)
         self.btnTans.place(x=516,y=310)
+        self.label3 = Label(self.ventana,text='TRADUCIR A:',bg="light blue")
+        self.label3.place(x=511,y=154)
+        self.entryLang = ttk.Combobox(self.ventana,width=7)
+        self.entryLang.place(x=516,y=170)
+        
 
         self.ventana.mainloop()
 
