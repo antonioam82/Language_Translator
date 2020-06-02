@@ -4,36 +4,41 @@ from tkinter import messagebox, filedialog
 import pyttsx3
 from googletrans import Translator
 
-ventana = Tk()
-ventana.title("Traductor")
-ventana['bg'] = 'light blue'
-ventana.geometry('1101x490')
-translator = Translator()
-traduc = ""
+class traductor():
+    def __init__(self):
+        self.ventana = Tk()
+        self.ventana.title("Traductor")
+        self.ventana['bg'] = 'light blue'
+        self.ventana.geometry('1101x490')
+        self.translator = Translator()
+        self.texto = ""
+        self.traduc = ""
+        self.lang = 'en'
 
-def traduce():
-    global traduc
-    display2.delete('1.0',END)
-    traduc = translator.translate(display1.get('1.0',END),dest='ja')
-    display2.insert(END,traduc.text)
-    traduc = ""
-    
-display1 = scrolledtext.ScrolledText(ventana,width=55,height=18)
-display1.place(x=30,y=77)
-display2 = scrolledtext.ScrolledText(ventana,width=55,height=18)
-display2.place(x=610,y=77)
-btnListen1 = Button(ventana,text='ESCUCHAR',bg='green',fg='white',width=64)
-btnListen1.place(x=30,y=373)
-btnListen2 = Button(ventana,text='ESCUCHAR',bg='green',fg='white',width=64)
-btnListen2.place(x=610,y=373)
-label1 = Label(ventana,text="TEXTO",bg="light blue",width=64)
-label1.place(x=30,y=53)
-label2 = Label(ventana,text="TRADUCCIÓN",bg="light blue",width=64)
-label2.place(x=610,y=53)
-btnTans = Button(ventana,text='TRADUCIR',command=traduce)
-btnTans.place(x=516,y=310)
+        self.display1 = scrolledtext.ScrolledText(self.ventana,width=55,height=18)
+        self.display1.place(x=30,y=77)
+        self.display2 = scrolledtext.ScrolledText(self.ventana,width=55,height=18)
+        self.display2.place(x=610,y=77)
+        self.btnListen1 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64)
+        self.btnListen1.place(x=30,y=373)
+        self.btnListen2 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64)
+        self.btnListen2.place(x=610,y=373)
+        self.label1 = Label(self.ventana,text="TEXTO",bg="light blue",width=64)
+        self.label1.place(x=30,y=53)
+        self.label2 = Label(self.ventana,text="TRADUCCIÓN",bg="light blue",width=64)
+        self.label2.place(x=610,y=53)
+        self.btnTans = Button(self.ventana,text='TRADUCIR',command=self.traduce)
+        self.btnTans.place(x=516,y=310)
 
+        self.ventana.mainloop()
 
+    def traduce(self):
+        self.display2.delete('1.0',END)
+        self.texto = self.display1.get('1.0',END)
+        self.traduc = (self.translator.translate(self.texto,dest='es').text)
+        self.display2.insert(END,self.traduc)
+        self.traduc = ""
+        self.texto = ""
 
-    
-ventana.mainloop()
+if __name__=="__main__":
+    traductor()
