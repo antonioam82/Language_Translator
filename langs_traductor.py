@@ -57,7 +57,7 @@ class traductor():
         self.lang = self.entryLang.get()
         if self.entryLang.get() == "":
             self.lang = 'en'
-        self.traduc = (self.translator.translate(self.texto,dest=self.lang).text)
+        self.traduc = (self.translator.translate(self.texto.lower(),dest=self.lang).text)
         self.display2.insert(END,self.traduc)
         #self.traduc = ""
         self.tts = gtts.gTTS(self.traduc,lang=self.lang)
@@ -78,7 +78,3 @@ class traductor():
 
     def listen(self):
         playsound("speaking.mp3")
-        
-        
-if __name__=="__main__":
-    traductor()
