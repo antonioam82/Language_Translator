@@ -24,11 +24,11 @@ class traductor():
         self.display1.place(x=30,y=77)
         self.display2 = scrolledtext.ScrolledText(self.ventana,width=55,height=18)
         self.display2.place(x=610,y=77)
-        self.btnListen1 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64)
+        self.btnListen1 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64,command=self.detect)
         self.btnListen1.place(x=30,y=373)
         self.btnListen2 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64,command=self.inicia)
         self.btnListen2.place(x=610,y=373)
-        self.label1 = Label(self.ventana,text="TEXTO",bg="light blue",width=64)
+        self.label1 = Label(self.ventana,text="TEXTO A TRADUCIR",bg="light blue",width=64)
         self.label1.place(x=30,y=53)
         self.label2 = Label(self.ventana,text="TRADUCCIÓN",bg="light blue",width=64)
         self.label2.place(x=610,y=53)
@@ -39,7 +39,16 @@ class traductor():
         self.entryLang = ttk.Combobox(self.ventana,width=7)
         self.entryLang.place(x=516,y=170)
         
+
         self.ventana.mainloop()
+
+    def detect(self):
+        if "speaking1.mp3" in os.listdir():
+            os.remove("speaking1.mp3")
+        self.lang = (self.translator.translate(self.display1.get('1.0',END)).src)
+        self.tts = gtts.gTTS(self.display1.get('1.0',END),lang=self.lang)
+        self.tts.save("speaking1.mp3")
+        playsound("speaking1.mp3")
 
     def traduce(self):
         if "speaking.mp3" in os.listdir():
