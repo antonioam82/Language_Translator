@@ -32,14 +32,13 @@ class traductor():
         self.label1.place(x=30,y=53)
         self.label2 = Label(self.ventana,text="TRADUCCIÓN",bg="light blue",width=64)
         self.label2.place(x=610,y=53)
-        self.btnTans = Button(self.ventana,text='TRADUCIR',command=self.traduce)
+        self.btnTans = Button(self.ventana,text='TRADUCIR',command=self.inicia_traduc)
         self.btnTans.place(x=516,y=310)
         self.label3 = Label(self.ventana,text='TRADUCIR A:',bg="light blue")
         self.label3.place(x=511,y=154)
         self.entryLang = ttk.Combobox(self.ventana,width=7)
         self.entryLang.place(x=516,y=170)
         
-
         self.ventana.mainloop()
 
     def detect(self):
@@ -64,6 +63,10 @@ class traductor():
         self.tts = gtts.gTTS(self.traduc,lang=self.lang)
         self.tts.save("speaking.mp3")
         self.texto = ""
+
+    def inicia_traduc(self):
+        t1 = threading.Thread(target=self.traduce)
+        t1.start()
 
     def inicia(self):
         t = threading.Thread(target=self.listen)
