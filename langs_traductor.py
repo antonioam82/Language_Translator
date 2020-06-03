@@ -24,7 +24,7 @@ class traductor():
         self.display1.place(x=30,y=77)
         self.display2 = scrolledtext.ScrolledText(self.ventana,width=55,height=18)
         self.display2.place(x=610,y=77)
-        self.btnListen1 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64,command=self.detect)
+        self.btnListen1 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64,command=self.inicia_detect)
         self.btnListen1.place(x=30,y=373)
         self.btnListen2 = Button(self.ventana,text='ESCUCHAR',bg='green',fg='white',width=64,command=self.inicia)
         self.btnListen2.place(x=610,y=373)
@@ -71,6 +71,10 @@ class traductor():
     def inicia(self):
         t = threading.Thread(target=self.listen)
         t.start()
+
+    def inicia_detect(self):
+        t2 = threading.Thread(target=self.detect)
+        t2.start()
 
     def listen(self):
         playsound("speaking.mp3")
