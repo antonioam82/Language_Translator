@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox, filedialog
 from tkinter import ttk
+#import pyttsx3
 import threading
 from playsound import playsound
 import gtts
@@ -53,17 +54,17 @@ class traductor():
         if "speaking.mp3" in os.listdir():
             os.remove("speaking.mp3")
         self.display2.delete('1.0',END)
-        self.texto = self.display1.get('1.0',END)
-        self.lang = self.entryLang.get()
-        if self.entryLang.get() == "":
-            self.lang = 'en'
-        self.traduc = (self.translator.translate(self.texto.lower(),dest=self.lang).text)
-        print(self.traduc)
-        self.display2.insert(END,self.traduc)
-        #self.traduc = ""
-        self.tts = gtts.gTTS(self.traduc,lang=self.lang)
-        self.tts.save("speaking.mp3")
-        self.texto = ""
+        if len(self.display1.get('1.0',END)) > 1:
+            self.texto = self.display1.get('1.0',END)
+            self.lang = self.entryLang.get()
+            if self.entryLang.get() == "":
+                self.lang = 'en'
+            self.traduc = (self.translator.translate(self.texto.lower(),dest=self.lang).text)
+            print(self.traduc)
+            self.display2.insert(END,self.traduc)
+            self.tts = gtts.gTTS(self.traduc,lang=self.lang)
+            self.tts.save("speaking.mp3")
+            self.texto = ""
 
     def inicia_traduc(self):
         t1 = threading.Thread(target=self.traduce)
