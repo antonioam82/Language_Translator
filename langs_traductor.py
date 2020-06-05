@@ -39,6 +39,7 @@ class traductor():
         self.label3.place(x=511,y=154)
         self.entryLang = ttk.Combobox(self.ventana,width=7)
         self.entryLang.place(x=516,y=170)
+        self.entryLang["values"]=list(langs.values())
         
         self.ventana.mainloop()
 
