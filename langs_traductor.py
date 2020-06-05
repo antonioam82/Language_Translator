@@ -37,8 +37,8 @@ class traductor():
         self.btnTans.place(x=516,y=310)
         self.label3 = Label(self.ventana,text='TRADUCIR A:',bg="light blue")
         self.label3.place(x=511,y=154)
-        self.entryLang = ttk.Combobox(self.ventana,width=7,state='readonly')
-        self.entryLang.place(x=516,y=170)
+        self.entryLang = ttk.Combobox(self.ventana,width=12,state='readonly')
+        self.entryLang.place(x=502,y=170)
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
         self.entryLang["values"]=self.valores
@@ -51,7 +51,8 @@ class traductor():
             os.remove("speaking1.mp3")
         if len(self.display1.get('1.0',END)) > 1:
             self.lang = (self.translator.translate(self.display1.get('1.0',END)).src)
-            self.tts = gtts.gTTS(self.display1.get('1.0',END))
+            print(self.lang)
+            self.tts = gtts.gTTS(self.display1.get('1.0',END),lang=self.lang)
             self.tts.save("speaking1.mp3")
             playsound("speaking1.mp3")
 
@@ -62,8 +63,8 @@ class traductor():
         if len(self.display1.get('1.0',END)) > 1:
             self.texto = self.display1.get('1.0',END)
             self.lang = self.claves[(self.valores).index(self.entryLang.get())]
-            if self.entryLang.get() == "":
-                self.lang = 'en'
+            #if self.entryLang.get() == "":
+                #self.lang = 'en'
             self.traduc = (self.translator.translate(self.texto.lower(),dest=self.lang).text)
             print(self.traduc)
             self.display2.insert(END,self.traduc)
@@ -96,4 +97,3 @@ class traductor():
         
 if __name__=="__main__":
     traductor()
-
