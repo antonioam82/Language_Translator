@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter.scrolledtext as scrolledtext
-from tkinter import messagebox, filedialog
+from tkinter import messagebox
 from tkinter import ttk
 #import pyttsx3
 from langs_dict import langs
@@ -86,7 +86,10 @@ class traductor():
 
     def listen(self):
         if "speaking.mp3" in os.listdir():
-            playsound("speaking.mp3")
+            try:
+                playsound("speaking.mp3")
+            except:
+                messagebox.showwarning("ERROR","Se ha producido un error al realizar la operación")
 
     def __del__(self):
         if "speaking1.mp3" in os.listdir():
