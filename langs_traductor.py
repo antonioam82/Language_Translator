@@ -39,7 +39,10 @@ class traductor():
         self.label3.place(x=511,y=154)
         self.entryLang = ttk.Combobox(self.ventana,width=7,state='readonly')
         self.entryLang.place(x=516,y=170)
-        self.entryLang["values"]=list(langs.values())
+        self.valores = list(langs.values())
+        self.claves = list(langs.keys())
+        self.entryLang["values"]=self.valores
+        
         
         self.ventana.mainloop()
 
@@ -58,7 +61,7 @@ class traductor():
         self.display2.delete('1.0',END)
         if len(self.display1.get('1.0',END)) > 1:
             self.texto = self.display1.get('1.0',END)
-            self.lang = self.entryLang.get()
+            self.lang = self.claves[(self.valores).index(self.entryLang.get())]
             if self.entryLang.get() == "":
                 self.lang = 'en'
             self.traduc = (self.translator.translate(self.texto.lower(),dest=self.lang).text)
