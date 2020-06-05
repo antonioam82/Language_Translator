@@ -60,7 +60,7 @@ class traductor():
         if "speaking.mp3" in os.listdir():
             os.remove("speaking.mp3")
         self.display2.delete('1.0',END)
-        if len(self.display1.get('1.0',END)) > 1:
+        if len(self.display1.get('1.0',END)) > 1 and self.entryLang.get() != "":
             self.texto = self.display1.get('1.0',END)
             self.lang = self.claves[(self.valores).index(self.entryLang.get())]
             #if self.entryLang.get() == "":
