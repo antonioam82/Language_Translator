@@ -42,6 +42,8 @@ class traductor():
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
         self.entryLang["values"]=self.valores
+        self.btnCopy = Button(self.ventana,text="COPIAR TEXTO")
+        self.btnCopy.place(x=30,y=420)
         
         
         self.ventana.mainloop()
