@@ -2,7 +2,6 @@ from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox
 from tkinter import ttk
-#import pyttsx3
 import time
 import pyperclip
 from langs_dict import langs
@@ -21,6 +20,7 @@ class traductor():
         self.translator = Translator()
         self.texto = ""
         self.traduc = ""
+        self.finished = True
         self.lang = 'en'
 
         self.display1 = scrolledtext.ScrolledText(self.ventana,width=55,height=18)
@@ -87,8 +87,10 @@ class traductor():
             self.tts = gtts.gTTS(self.traduc,lang=self.lang)
             self.tts.save("speaking.mp3")
             self.texto = ""
+            self.finished = True
 
     def inicia_traduc(self):
+        self.finished = False
         t1 = threading.Thread(target=self.traduce)
         t1.start()
 
@@ -101,11 +103,8 @@ class traductor():
         t2.start()
 
     def listen(self):
-        if "speaking.mp3" in os.listdir():
-            try:
-                playsound("speaking.mp3")
-            except:
-                messagebox.showwarning("ERROR","Se ha producido un error al realizar la operación")
+        if "speaking.mp3" in os.listdir() and self.finished == True:
+            playsound("speaking.mp3")
 
     def inicia_copia(self):
         messagebox.showinfo("COPIAR TEXTO","Seleccione el texto a pegar y escoje la opción \'Copiar\'")
