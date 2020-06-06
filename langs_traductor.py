@@ -44,7 +44,7 @@ class traductor():
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
         self.entryLang["values"]=self.valores
-        self.btnCopy = Button(self.ventana,text="COPIAR TEXTO",command=self.inicia_copia)
+        self.btnCopy = Button(self.ventana,text="PEGAR UN TEXTO",command=self.inicia_copia)
         self.btnCopy.place(x=30,y=420)
         
         
@@ -108,6 +108,7 @@ class traductor():
                 messagebox.showwarning("ERROR","Se ha producido un error al realizar la operación")
 
     def inicia_copia(self):
+        messagebox.showinfo("COPIAR TEXTO","Seleccione el texto a pegar y escoje la opción \'Copiar\'")
         t3 = threading.Thread(target=self.copy_text)
         t3.start()
 
