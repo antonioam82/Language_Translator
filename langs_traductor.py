@@ -3,6 +3,8 @@ import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox
 from tkinter import ttk
 #import pyttsx3
+import time
+import pyperclip
 from langs_dict import langs
 import threading
 from playsound import playsound
@@ -42,7 +44,7 @@ class traductor():
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
         self.entryLang["values"]=self.valores
-        self.btnCopy = Button(self.ventana,text="COPIAR TEXTO")
+        self.btnCopy = Button(self.ventana,text="COPIAR TEXTO",command=self.inicia_copia)
         self.btnCopy.place(x=30,y=420)
         
         
@@ -57,6 +59,18 @@ class traductor():
             self.tts = gtts.gTTS(self.display1.get('1.0',END),lang=self.lang)
             self.tts.save("speaking1.mp3")
             playsound("speaking1.mp3")
+
+    def copy_text(self):
+        self.ultima_copia = pyperclip.paste().strip()
+        while True:
+            time.sleep(0.1)
+            self.copia = pyperclip.paste().strip()
+            if self.copia != self.ultima_copia:
+                self.display1.insert(END,self.copia)
+                self.ultima_copia = self.copia
+                print("Done!")
+                break
+            
 
     def traduce(self):
         if "speaking.mp3" in os.listdir():
@@ -92,6 +106,10 @@ class traductor():
                 playsound("speaking.mp3")
             except:
                 messagebox.showwarning("ERROR","Se ha producido un error al realizar la operación")
+
+    def inicia_copia(self):
+        t3 = threading.Thread(target=self.copy_text)
+        t3.start()
 
     def __del__(self):
         if "speaking1.mp3" in os.listdir():
