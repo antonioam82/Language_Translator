@@ -47,6 +47,8 @@ class traductor():
         self.entryLang["values"]=self.valores
         self.btnCopy = Button(self.ventana,text="PEGAR UN TEXTO",command=self.inicia_copia)
         self.btnCopy.place(x=30,y=420)
+        self.textLabel = Label(self.ventana, width=156, bg="light blue")
+        self.textLabel.place(x=1,y=25)
         
         
         self.ventana.mainloop()
@@ -59,6 +61,7 @@ class traductor():
             print(self.lang)
             self.tts = gtts.gTTS(self.display1.get('1.0',END),lang=self.lang)
             self.tts.save("speaking1.mp3")
+            self.textLabel.configure(text="")
             playsound("speaking1.mp3")
 
     def copy_text(self):
@@ -68,6 +71,7 @@ class traductor():
             self.copia = pyperclip.paste().strip()
             if self.copia != self.ultima_copia:
                 self.display1.insert(END,self.copia)
+                #messagebox.showinfo("TEXTO COPIADO","Textp copiado correctamante")
                 self.ultima_copia = self.copia
                 print("Done!")
                 break
@@ -83,6 +87,7 @@ class traductor():
                 self.lang = self.claves[(self.valores).index(self.entryLang.get())]
                 self.traduc = (self.translator.translate(self.texto.lower(),dest=self.lang).text)
                 self.display2.insert(END,self.traduc)
+                self.textLabel.configure(text="")
                 self.tts = gtts.gTTS(self.traduc,lang=self.lang)
                 self.tts.save("speaking.mp3")
                 self.texto = ""
@@ -92,6 +97,7 @@ class traductor():
 
     def inicia_traduc(self):
         self.finished = False
+        self.textLabel.configure(text="TRADUCIENDO...")
         t1 = threading.Thread(target=self.traduce)
         t1.start()
 
@@ -100,6 +106,7 @@ class traductor():
         t.start()
 
     def inicia_detect(self):
+        self.textLabel.configure(text="GENARANDO AUDIO...")
         t2 = threading.Thread(target=self.detect)
         t2.start()
 
