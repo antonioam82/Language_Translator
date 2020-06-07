@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox
 from tkinter import ttk
+#import pyttsx3
 import time
 import pyperclip
 from langs_dict import langs
@@ -77,17 +78,17 @@ class traductor():
             os.remove("speaking.mp3")
         self.display2.delete('1.0',END)
         if len(self.display1.get('1.0',END)) > 1 and self.entryLang.get() != "":
-            self.texto = self.display1.get('1.0',END)
-            self.lang = self.claves[(self.valores).index(self.entryLang.get())]
-            #if self.entryLang.get() == "":
-                #self.lang = 'en'
-            self.traduc = (self.translator.translate(self.texto.lower(),dest=self.lang).text)
-            print(self.traduc)
-            self.display2.insert(END,self.traduc)
-            self.tts = gtts.gTTS(self.traduc,lang=self.lang)
-            self.tts.save("speaking.mp3")
-            self.texto = ""
-            self.finished = True
+            try:
+                self.texto = self.display1.get('1.0',END)
+                self.lang = self.claves[(self.valores).index(self.entryLang.get())]
+                self.traduc = (self.translator.translate(self.texto.lower(),dest=self.lang).text)
+                self.display2.insert(END,self.traduc)
+                self.tts = gtts.gTTS(self.traduc,lang=self.lang)
+                self.tts.save("speaking.mp3")
+                self.texto = ""
+                self.finished = True
+            except:
+                messagebox.showwarning("ERROR","Se produjo un error")
 
     def inicia_traduc(self):
         self.finished = False
