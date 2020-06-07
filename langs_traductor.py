@@ -65,6 +65,7 @@ class traductor():
             playsound("speaking1.mp3")
 
     def copy_text(self):
+        self.display1.delete('1.0',END)
         self.ultima_copia = pyperclip.paste().strip()
         while True:
             time.sleep(0.1)
