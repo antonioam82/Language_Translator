@@ -37,7 +37,7 @@ class traductor():
         self.label2 = Label(self.ventana,text="TRADUCCIÓN",bg="light blue",width=64)
         self.label2.place(x=610,y=53)
         self.btnTans = Button(self.ventana,text='TRADUCIR',command=self.inicia_traduc)
-        self.btnTans.place(x=516,y=310)
+        self.btnTans.place(x=517,y=310)
         self.label3 = Label(self.ventana,text='TRADUCIR A:',bg="light blue")
         self.label3.place(x=511,y=154)
         self.entryLang = ttk.Combobox(self.ventana,width=12,state='readonly')
