@@ -41,7 +41,7 @@ class traductor():
         self.label3 = Label(self.ventana,text='TRADUCIR A:',bg="light blue")
         self.label3.place(x=511,y=154)
         self.entryLang = ttk.Combobox(self.ventana,width=12,state='readonly')
-        self.entryLang.place(x=502,y=170)
+        self.entryLang.place(x=502,y=170)#y=170)
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
         self.entryLang["values"]=self.valores
@@ -72,7 +72,6 @@ class traductor():
             self.copia = pyperclip.paste().strip()
             if self.copia != self.ultima_copia:
                 self.display1.insert(END,self.copia)
-                #messagebox.showinfo("TEXTO COPIADO","Textp copiado correctamante")
                 self.ultima_copia = self.copia
                 print("Done!")
                 break
@@ -94,7 +93,7 @@ class traductor():
                 self.texto = ""
                 self.finished = True
             except:
-                messagebox.showwarning("ERROR","Se produjo un error")
+                messagebox.showwarning("ERROR","Se ha producido un error de conexión")
 
     def inicia_traduc(self):
         self.finished = False
