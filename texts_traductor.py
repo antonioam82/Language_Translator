@@ -49,6 +49,8 @@ class traductor():
         self.btnCopy.place(x=30,y=420)
         self.textLabel = Label(self.ventana, width=156, bg="light blue")
         self.textLabel.place(x=1,y=25)
+        self.btnReset = Button(self.ventana, text="RECOVER TEXT",command=self.recover_text)
+        self.btnReset.place(x=30,y=450)
         
         
         self.ventana.mainloop()
@@ -72,9 +74,13 @@ class traductor():
             self.copia = pyperclip.paste().strip()
             if self.copia != self.ultima_copia:
                 self.display1.insert(END,self.copia)
-                self.ultima_copia = self.copia
+                #messagebox.showinfo("TEXTO COPIADO","Textp copiado correctamante")
+                self.ultima_copia = self.copia 
                 print("Done!")
                 break
+
+    def recover_text(self):
+        self.display1.insert(END,self.copia)
             
 
     def traduce(self):
@@ -93,7 +99,7 @@ class traductor():
                 self.texto = ""
                 self.finished = True
             except:
-                messagebox.showwarning("ERROR","Se ha producido un error de conexión")
+                messagebox.showwarning("ERROR","Se produjo un error")
 
     def inicia_traduc(self):
         self.finished = False
