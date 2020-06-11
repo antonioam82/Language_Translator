@@ -114,7 +114,7 @@ class traductor():
         t.start()
 
     def inicia_detect(self):
-        self.textLabel.configure(text="GENARANDO AUDIO...")
+        self.textLabel.configure(text="GENERANDO AUDIO...")
         t2 = threading.Thread(target=self.detect)
         t2.start()
 
