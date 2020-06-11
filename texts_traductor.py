@@ -49,7 +49,7 @@ class traductor():
         self.btnCopy.place(x=30,y=420)
         self.textLabel = Label(self.ventana, width=156, bg="light blue")
         self.textLabel.place(x=1,y=25)
-        self.btnReset = Button(self.ventana, text="RECOVER TEXT",command=self.recover_text)
+        self.btnReset = Button(self.ventana, text="RECUPERAR TEXTO",command=self.recover_text)
         self.btnReset.place(x=30,y=450)
         
         
