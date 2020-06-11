@@ -2,7 +2,6 @@ from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox
 from tkinter import ttk
-#import pyttsx3
 import time
 import pyperclip
 from langs_dict import langs
@@ -99,8 +98,7 @@ class traductor():
                 self.texto = ""
                 self.finished = True
         except:
-            messagebox.showwarning("ERROR","Se produjo un error")
-            self.textLabel.configure(text="")
+            self.textLabel.configure(text="SE PRODUJO UN ERROR")
             
 
     def inicia_traduc(self):
@@ -114,7 +112,7 @@ class traductor():
         t.start()
 
     def inicia_detect(self):
-        self.textLabel.configure(text="GENERANDO AUDIO...")
+        self.textLabel.configure(text="GENARANDO AUDIO...")
         t2 = threading.Thread(target=self.detect)
         t2.start()
 
@@ -131,8 +129,7 @@ class traductor():
         if "speaking1.mp3" in os.listdir():
             os.remove("speaking1.mp3")
         if "speaking.mp3" in os.listdir():
-            os.remove("speaking.mp3")        
-        
+            os.remove("speaking.mp3")
         
 if __name__=="__main__":
     traductor()
