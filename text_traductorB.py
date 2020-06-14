@@ -67,7 +67,7 @@ class traductor():
             self.tts.save("speaking1.mp3")
             self.textLabel.configure(text="")
             pygame.mixer.music.load("speaking1.mp3")
-            pygame.mixer.music.play("speaking1.mp3")
+            pygame.mixer.music.play(loops=0,start=0.0)
             
 
     def copy_text(self):
@@ -124,7 +124,7 @@ class traductor():
     def listen(self):
         if "speaking.mp3" in os.listdir() and self.finished == True:
             pygame.mixer.music.load("speaking.mp3")
-            pygame.mixer.music.play("speaking.mp3")
+            pygame.mixer.music.play(loops=0,start=0.0)
 
     def inicia_copia(self):
         messagebox.showinfo("COPIAR TEXTO","Seleccione el texto a pegar y escoje la opción \'Copiar\'")
