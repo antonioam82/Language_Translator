@@ -22,6 +22,7 @@ class traductor():
         self.traduc = ""
         self.finished = True
         self.lang = 'en'
+        self.copia = ""
 
         self.display1 = scrolledtext.ScrolledText(self.ventana,width=55,height=18)
         self.display1.place(x=30,y=77)
