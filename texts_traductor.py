@@ -21,7 +21,7 @@ class traductor():
         self.texto = ""
         self.traduc = ""
         self.finished = True
-        self.lang = 'en'
+        #self.lang = 'en'
         self.copia = ""
 
         self.display1 = scrolledtext.ScrolledText(self.ventana,width=55,height=18)
@@ -75,7 +75,6 @@ class traductor():
             self.copia = pyperclip.paste().strip()
             if self.copia != self.ultima_copia:
                 self.display1.insert(END,self.copia)
-                #messagebox.showinfo("TEXTO COPIADO","Textp copiado correctamante")
                 self.ultima_copia = self.copia 
                 print("Done!")
                 break
