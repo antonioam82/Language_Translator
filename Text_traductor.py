@@ -41,11 +41,11 @@ class traductor():
         self.label3 = Label(self.ventana,text='TRADUCIR A:',bg="light blue")
         self.label3.place(x=511,y=1)
         self.entryLang = ttk.Combobox(self.ventana,width=24,state='readonly')
-        self.entryLang.place(x=469,y=1)#y=170)
+        self.entryLang.place(x=467,y=1)#y=170)
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
         self.entryLang["values"]=self.valores
-        self.entryLang.set("Choose Language")
+        self.entryLang.set("Selecciona Idioma")
         self.btnCopy = Button(self.ventana,text="PEGAR UN TEXTO",command=self.inicia_copia)
         self.btnCopy.place(x=30,y=420)
         self.textLabel = Label(self.ventana, width=156, bg="light blue")
