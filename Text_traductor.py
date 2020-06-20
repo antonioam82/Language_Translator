@@ -53,7 +53,6 @@ class traductor():
         self.btnReset = Button(self.ventana, text="RECUPERAR TEXTO",command=self.recover_text)
         self.btnReset.place(x=30,y=450)
         
-        
         self.ventana.mainloop()
 
     def detect(self):
@@ -81,8 +80,7 @@ class traductor():
 
     def recover_text(self):
         self.display1.insert(END,self.copia)
-            
-
+        
     def traduce(self):
         try:
             if "speaking.mp3" in os.listdir():
