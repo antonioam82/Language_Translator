@@ -1,15 +1,25 @@
 from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import messagebox
-from tkinter import ttk
-import time
+from tkinter import ttk, filedialog
 import pyperclip
-from langs_dict import langs
+import time
+#from langs_dict import langs
 import threading
 from playsound import playsound
 import gtts
 import os
 from googletrans import Translator
+
+langs ={'af': 'Afrikaans', 'sq': 'Albanian', 'ar': 'Arabic', 'hy': 'Armenian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'hr': 'Croatian',
+        'cs': 'Czech', 'da': 'Danish', 'nl': 'Dutch', 'en': 'English', 'eo': 'Esperanto', 'et': 'Estonian', 'tl': 'Filipino','fi': 'Finnish','fr': 'French',
+        'de': 'German', 'el': 'Greek', 'gu': 'Gujarati', 'hi': 'Hindi', 'hu': 'Hungarian', 'is': 'Icelandic', 'id': 'Indonesian', 'it': 'Italian',
+        'ja': 'Japanese', 'jw': 'Javanese', 'kn': 'Kannada', 'km': 'Khmer', 'ko': 'Korean', 'la': 'Latin', 'lv': 'Latvian', 'mk': 'Macedonian',
+        'ml': 'Malayalam', 'mr': 'Marathi', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'no': 'Norwegian', 'pl': 'Polish',
+        'pt': 'Portuguese', 'ro': 'Romanian', 'ru': 'Russian', 'sr': 'Serbian', 'si': 'Sinhala', 'sk': 'Slovak', 'es': 'Spanish', 'su': 'Sundanese',
+        'sw': 'Swahili', 'sv': 'Swedish', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu',
+        'vi': 'Vietnamese', 'cy': 'Welsh', 'zh-cn': 'Chinese (Mandarin/China)', 'zh-tw': 'Chinese (Mandarin/Taiwan)'}
+
 
 class traductor():
     def __init__(self):
@@ -21,7 +31,6 @@ class traductor():
         self.texto = ""
         self.traduc = ""
         self.finished = True
-        #self.lang = 'en'
         self.copia = ""
 
         self.display1 = scrolledtext.ScrolledText(self.ventana,width=55,height=18)
@@ -52,9 +61,27 @@ class traductor():
         self.textLabel.place(x=1,y=25)
         self.btnReset = Button(self.ventana, text="RECUPERAR TEXTO",command=self.recover_text)
         self.btnReset.place(x=30,y=450)
+        self.btnSave = Button(self.ventana,text="GUARDAR TRADUCCIÓN",command=self.guardar)
+        self.btnSave.place(x=929,y=450)
         
         
         self.ventana.mainloop()
+
+    def guardar(self):
+        if len(self.display2.get('1.0',END))>1:
+            documento = filedialog.asksaveasfilename(initialdir="/",
+                        title="Guardar en",defaultextension='.txt')
+            if documento != "":
+                archivo_guardar = open(documento,"w",encoding="utf-8")
+                linea=""
+                for c in str(self.display2.get('1.0',END)):
+                    linea=linea+c
+                    if len(linea) == 160:
+                        archivo_guardar.write(linea+"\n")
+                        linea=""
+                archivo_guardar.write(linea)
+                archivo_guardar.close()
+                messagebox.showinfo("GUARDADO","INFORMACIÓN GUARDADA EN \'{}\'".format(documento))
 
     def detect(self):
         if "speaking1.mp3" in os.listdir():
@@ -110,7 +137,7 @@ class traductor():
         t1.start()
 
     def inicia(self):
-        t = threading.Thread(target=self.listen)
+        t = threading.Thread(target=self.listen, daemon=True)
         t.start()
 
     def inicia_detect(self):
