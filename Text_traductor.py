@@ -4,7 +4,6 @@ from tkinter import messagebox
 from tkinter import ttk, filedialog
 import pyperclip
 import time
-#from langs_dict import langs
 import threading
 from playsound import playsound
 import gtts
@@ -81,7 +80,7 @@ class traductor():
                         linea=""
                 archivo_guardar.write(linea)
                 archivo_guardar.close()
-                messagebox.showinfo("GUARDADO","INFORMACIÓN GUARDADA EN \'{}\'".format(documento))
+                messagebox.showinfo("GUARDADO","TRADUCCIÓN GUARDADA EN \'{}\'".format(documento))
 
     def detect(self):
         if "speaking1.mp3" in os.listdir():
