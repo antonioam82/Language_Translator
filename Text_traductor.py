@@ -138,7 +138,7 @@ class traductor():
         t1.start()
 
     def inicia(self):
-        t = threading.Thread(target=self.listen, daemon=True)
+        t = threading.Thread(target=self.listen)
         t.start()
 
     def inicia_detect(self):
