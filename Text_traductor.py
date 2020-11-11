@@ -97,6 +97,7 @@ class traductor():
                 playsound("speaking1.mp3")
             except Exception as e:
                 messagebox.showwarning("ERROR","Se produjo un error inesperado.")
+                self.textLabel.configure(text="")
 
     def copy_text(self):
         self.display1.delete('1.0',END)
@@ -141,7 +142,7 @@ class traductor():
         t1.start()
 
     def inicia(self):
-        t = threading.Thread(target=self.listen, daemon=True)
+        t = threading.Thread(target=self.listen)
         t.start()
 
     def inicia_detect(self):
