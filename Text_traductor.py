@@ -88,12 +88,15 @@ class traductor():
         if "speaking1.mp3" in os.listdir():
             os.remove("speaking1.mp3")
         if len(self.display1.get('1.0',END)) > 1:
-            self.lang = (self.translator.translate(self.display1.get('1.0',END)).src)
-            print(self.lang)
-            self.tts = gtts.gTTS(self.display1.get('1.0',END),lang=self.lang)
-            self.tts.save("speaking1.mp3")
-            self.textLabel.configure(text="")
-            playsound("speaking1.mp3")
+            try:
+                self.lang = (self.translator.translate(self.display1.get('1.0',END)).src)
+                print(self.lang)
+                self.tts = gtts.gTTS(self.display1.get('1.0',END),lang=self.lang)
+                self.tts.save("speaking1.mp3")
+                self.textLabel.configure(text="")
+                playsound("speaking1.mp3")
+            except Exception as e:
+                messagebox.showwarning("ERROR","Se produjo un error inesperado.")
 
     def copy_text(self):
         self.display1.delete('1.0',END)
@@ -138,7 +141,7 @@ class traductor():
         t1.start()
 
     def inicia(self):
-        t = threading.Thread(target=self.listen)
+        t = threading.Thread(target=self.listen, daemon=True)
         t.start()
 
     def inicia_detect(self):
